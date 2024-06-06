@@ -1,0 +1,15 @@
+{
+  "name": "laughloud",
+  "version": "1.0.0",
+  "description": "LaughLoud as Desktop App created with Electron",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "LaughLoud": "electron ."
+  },
+  "author": "Jannis Bönsch",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^30.1.0"
+  }
+}
