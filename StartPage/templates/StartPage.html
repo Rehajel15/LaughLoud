@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Welcome to LoughLoud</title>
+    <meta name="description" content="Welcome to LoughLoud. Are you ready for ">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <style>
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: rgb(56,7,7);
+            margin: 0px;
+            transition: 1s;
+        }
+
+        @keyframes slideUp {
+            0% {
+                transform: translateY(100%); 
+                opacity: 0; 
+            }
+            100% {
+                transform: translateY(0); 
+                opacity: 1;
+            }
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0; 
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+
+        .animationSlow {
+            animation: slideUp 1s ease-out 1;
+        }
+
+        .animationCard {
+            animation: appear 1s ease-out 1;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="mt-2 me-3 me-md-5 d-flex justify-content-end text-center">
+        <a class="text-white fs-5 me-4" href="{% url 'authentication:signup' %}">Sign Up</a>
+        <a class="text-white fs-5" href="{% url 'authentication:signin' %}">Sign In</a>
+    </div>
+
+    <div class="d-flex mt-3 justify-content-center">
+        {% load static %} <img height="135" id="logoImage" src="{% static  '/img/Logo.png' %}" alt="Logo of LoughLoud">
+    </div>
+
+    <div class="container d-flex flex-column align-items-center mt-5 text-center">
+        <span class="animationSlow"><i class="text-white fs-4">Imagine a place...</i></span>
+        <span id="animationText1" class="d-none mt-5"><i class="text-white fs-4">A place in where everyone is able to make everyone laugh.</i></span>
+        <span id="animationText2" class="d-none mt-5"><i class="text-white fs-4">Oh wait...</i></span>
+        <span id="animationText3" class="d-none mt-5"><i class="text-white fs-4">There is actually one.</i></span>
+        <span id="animationText4" class="d-none mt-5"><b class="text-white fs-4">Welcome to LaughLoud!</b></span>
+    </div>
+
+    <div class="d-flex flex-column align-items-center mt-5 w-100 px-3 h-100">
+
+        <div id="card1" class="card mb-3 w-75 d-none">
+            <img class="card-img-top" src="{% static 'img/homePage.png' %}" alt="Picture of the home page">
+            <div class="card-body text-center">
+              <h5 class="card-title">Explore Endless Entertainment!</h5>
+              <p class="card-text">Dive into a world full of humor! Here, you can browse through a variety of jokes uploaded by the community and have a delightful time.</p>
+            </div>
+        </div>
+
+        <div id="card2" class="card mb-3 w-75 mt-5 d-none">
+            <img class="card-img-top" src="{% static 'img/uploadPage.png' %}" alt="Picture of the home page">
+            <div class="card-body text-center">
+              <h5 class="card-title">Share Your Humor with the World!</h5>
+              <p class="card-text">On this page, you can upload your funny jokes and categorize them to provide a great laughing experience to other users.</p>
+            </div>
+        </div>
+
+        <div id="card3" class="card mb-3 w-75 mt-5 d-none">
+            <img class="card-img-top" src="{% static 'img/notificationPage.png' %}" alt="Picture of the home page">
+            <div class="card-body text-center">
+              <h5 class="card-title">Stay Updated at All Times!</h5>
+              <p class="card-text">On this page, you'll receive important notifications about updates, new features, and other relevant information about the platform. Stay informed about the latest developments and never miss any important announcements!</p>
+            </div>
+        </div>
+
+        <div id="card4" class="card mb-3 w-75 mt-5 d-none">
+            <img class="card-img-top" src="{% static 'img/morePage.png' %}" alt="Picture of the home page">
+            <div class="card-body text-center">
+              <h5 class="card-title">Manage Your Account to Your Heart's Content!</h5>
+              <p class="card-text">Here, you have full control over your user experience. Customize your settings, update your profile, or simply log out when you need a break. Everything you need, all in one convenient overview.</p>
+            </div>
+        </div>
+    </div>
+    
+
+    <script>
+        window.onload = async (event) => {
+            changeLogoHeight()
+            await AnimationText()
+            await AnimationCard()
+
+        }
+
+        function AnimationText() {
+            return new Promise((resolve, reject) => {
+                for (let i = 1; i <= 4; i++) {
+                    let animationText = document.getElementById('animationText' + i);
+    
+                    setTimeout(() => {
+                        animationText.classList.remove('d-none')
+                        animationText.classList.add('animationSlow');
+                        if (i === 4) resolve();
+                    }, i * 1500);
+                }
+            })
+        }
+
+        function AnimationCard() {
+            return new Promise((resolve, reject) => {
+                for (let i = 1; i <= 4; i++) {
+                    let card = document.getElementById('card' + i);
+    
+                    setTimeout(() => {
+                        card.classList.remove('d-none')
+                        card.classList.add('animationCard')
+                        if (i === 4) resolve();
+                    }, i * 1000);
+                }
+            })
+        }
+
+        let logoImage = document.getElementById('logoImage');
+
+        function changeLogoHeight() {
+            logoImage.height = document.body.offsetWidth / 5
+
+            if(logoImage.height >= 140) {
+                logoImage.height = 140;
+            }
+            if(logoImage.height <= 95) {
+                logoImage.height = 95;
+            }
+        }
+        
+        window.addEventListener('resize', () => {
+            changeLogoHeight()
+        });
+    </script>
+    
+</body>
+</html>
