@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Sign in</title>
+        <meta name="description" content="Sign in for LoughLoud">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <link rel="icon" type="image/x-icon" href="/static/img/favicon.ico">
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <script src="{% static 'bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+        <style>
+            body {
+                font-family: 'Source Sans Pro', sans-serif;
+                background: url('/static/img/background.jpg') 50% 0 no-repeat fixed;
+                background-size: cover;
+                margin: 0px;
+            }
+
+            .alert {
+                background: radial-gradient(circle at center, rgb(56, 7, 7), rgba(56, 7, 7, 0.76));
+            }
+
+            .signin-container {
+                width: 400px;
+                background: radial-gradient(circle at center, rgb(56, 7, 7), rgba(56, 7, 7, 0.76));
+            }
+      
+            .profile {
+                background-color: rgb(150, 51, 51);
+                height: 35px;
+                width: 280px;
+                border-radius: 13px;
+                border-style: solid;
+                border-color: white;
+                transition: 0.5s;
+            }
+
+            .submitButton {
+                box-shadow:inset 0px 0px 4px 0px #cf866c;
+                background:linear-gradient(to bottom, #d0451b 5%, #bc3315 100%);
+                background-color:#d0451b;
+                border: solid #942911;
+                text-shadow:0px 4px 0px #854629;
+            }
+            .submitButton:hover {
+                background:linear-gradient(to bottom, #bc3315 5%, #d0451b 100%);
+                background-color:#bc3315;
+            }
+            .submitButton:active {
+                position:relative;
+                top:1px;
+            }
+        </style>
+    </head>
+    <body>
+        
+        {% for message in messages %}
+        <div class="alert alert-dismissible fade show text-white w-100 d-flex justify-content-center align-items-center position-fixed top-0 rounded-0 rounded-bottom-5 border-white" role="alert">
+            <div>
+                <strong>
+                    {% if message.tags == 'error' %}
+                    Error:
+                    {% else %}
+                    Message:
+                    {% endif %}
+                </strong>
+                {{message}}
+            </div>
+        </div>
+        {% endfor %}
+        
+
+        {% load static %} <div class="d-flex justify-content-center justify-content-md-start ms-md-3 mt-3"><img src="{% static 'img/Logo.png' %}" alt="Logo of LoughLoud" height="120"></div>
+
+        <div class="d-flex justify-content-center mt-2">
+            <div class="signin-container container h-auto mx-3 mt-1 mb-3 mt-md-5 rounded-4 d-flex flex-column justify-content-start align-items-center text-white">
+                <p class="text-decoration-underline fs-3 mt-4">Sign in!</p>
+                <form class="py-3" method="post", action="{% url 'authentication:signin' %}">
+                {% csrf_token %}
+                    <label class="form-label fs-5 d-flex justify-content-center mb-3" for="profile_name">Your username</label> 
+                    <input required class="profile d-block mx-auto fs-5 text-center text-white" type="text" id="profile_name" name="profile_name">
+                    <label class="form-label mt-5 fs-5 d-flex justify-content-center mb-3" for="profile_password">Your password</label>
+                    <input required class="profile d-block mx-auto fs-5 text-center text-white" type="password" id="profile_password" name="profile_password">
+                    <div class="d-flex justify-content-center mt-5">
+                        <button class="submitButton rounded-4 border-3 d-inline-block text-white fs-5 px-5 py-2 text-decoration-none" type="submit">Done!</button>
+                    </div>
+                </form>
+                <div class="container d-flex justify-content-start align-items-center pb-2 mt-2">
+                    <span class="material-symbols-outlined text-white pe-1">arrow_back</span>
+                    <a class="text-white" href="{% url 'authentication:signup' %}">I don't have an account</a>
+                </div>
+            <div>
+        </div>
+    </body>
+</html>
