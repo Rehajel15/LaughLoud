@@ -1,9 +1,7 @@
 @ECHO off
 
-start /min python manage.py runserver
+call ./env/Scripts/activate.bat
 
-start /min npm run LaughLoud
+start "" /b python manage.py runserver
 
-
-
-
+start "" /b npm run LaughLoud
